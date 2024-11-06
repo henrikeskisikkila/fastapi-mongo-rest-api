@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from dotenv import dotenv_values
+from routes import router
 
 config = dotenv_values(".env")
 
@@ -11,7 +12,4 @@ async def lifespan(app: FastAPI):
     print("Shutting down")
 
 app = FastAPI(lifespan=lifespan)
-
-@app.get("/")
-async def read_root():
-    return {"Hello": "World!"}
+app.include_router(router, prefix=config["API_PREFIX"])
