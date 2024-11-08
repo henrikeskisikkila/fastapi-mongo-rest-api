@@ -49,6 +49,14 @@ uvicorn main:app --reload
 
 The server will be running at `http://127.0.0.1:8000`.
 
+## Running tests
+
+Run tests:
+```bash
+pytest
+```
+
+
 ## API Endpoints
 
 ### Create a new todo
