@@ -20,3 +20,16 @@ async def list_todos(request: Request):
 async def show_todo(request: Request, id: str):
     todo = request.app.database["todos"].find_one({"_id": id})
     return todo or {"error": "Todo not found"}
+
+@router.put("/todos/{id}", response_description="Update a todo", response_model=TodoItem)
+async def update_todo(request: Request, id: str, todo: TodoItem = Body(...)):
+    todo = {k: v for k, v in todo.model_dump().items() if v is not None}
+    if len(todo) >= 1:
+        updated_todo = request.app.database["todos"].find_one_and_update({"_id": id}, {"$set": todo}, return_document=True)
+        return updated_todo
+    return {"error": "Todo not found"}
+
+@router.delete("/todos/{id}", response_description="Delete a todo")
+async def delete_todo(request: Request, id: str):
+    request.app.database["todos"].delete_one({"_id": id})
+    return {"message": "Todo deleted successfully"}
