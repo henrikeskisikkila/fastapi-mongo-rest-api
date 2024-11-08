@@ -15,3 +15,8 @@ async def create_todo(request: Request, todo: TodoItem = Body(...)):
 async def list_todos(request: Request):
     todos = request.app.database["todos"].find(limit=100)
     return [todo for todo in todos]
+
+@router.get("/todos/{id}", response_description="Get a single todo", response_model=TodoItem)
+async def show_todo(request: Request, id: str):
+    todo = request.app.database["todos"].find_one({"_id": id})
+    return todo or {"error": "Todo not found"}
