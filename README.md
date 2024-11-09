@@ -1,6 +1,6 @@
 # REST API with FastAPI and MongoDB
 
-This is a REST API template project built using FastAPI and MongoDB. You can use this project as an example to get started with a FastAPI backend that uses MongoDB. If you find this project useful, please drop a star.
+This is a REST API template project built using FastAPI and MongoDB. You can use this project as an example to get started with a FastAPI backend that uses MongoDB.
 
 ## Features
 
